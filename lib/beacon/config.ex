@@ -201,6 +201,7 @@ defmodule Beacon.Config do
 
   @type t :: %__MODULE__{
           site: Beacon.Types.Site.t(),
+          site_domain: String.t(),
           endpoint: endpoint(),
           router: router(),
           repo: repo(),
@@ -236,6 +237,7 @@ defmodule Beacon.Config do
   @default_media_types ["image/jpeg", "image/gif", "image/png", "image/webp", ".pdf"]
 
   defstruct site: nil,
+            site_domain: nil,
             endpoint: nil,
             router: nil,
             repo: nil,
@@ -268,6 +270,7 @@ defmodule Beacon.Config do
 
   @type option ::
           {:site, Beacon.Types.Site.t()}
+          | {:site_domain, String.t()}
           | {:endpoint, endpoint()}
           | {:router, router()}
           | {:repo, repo()}

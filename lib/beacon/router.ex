@@ -257,14 +257,14 @@ defmodule Beacon.Router do
   #
   # It's considered reachable if a dynamic page can be served on the site prefix.
   def reachable?(%Beacon.Config{} = config, opts \\ []) do
-    %{site: site, endpoint: endpoint, router: router} = config
-    reachable?(site, endpoint, router, opts)
-  rescue
+    %{site: site, site_domain: site_domain, endpoint: endpoint, router: router} = config
+    reachable?(site, site_domain, endpoint, router, opts)
+ rescue
     # missing router or missing beacon macros in the router
     _ -> false
   end
 
-  defp reachable?(site, endpoint, router, opts) do
+  defp reachable?(site, site_domain, endpoint, router, opts) do
     host = Keyword.get_lazy(opts, :host, fn -> endpoint.host() end)
 
     prefix =
@@ -274,7 +274,7 @@ defmodule Beacon.Router do
 
     path = Beacon.Router.sanitize_path(prefix <> "/__beacon_check__")
 
-    case Phoenix.Router.route_info(router, "GET", path, host) do
+    case Phoenix.Router.route_info(router, "GET", path, site_domain || host) do
       %{site: ^site, plug: Beacon.Web.CheckController} ->
         true
 

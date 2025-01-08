@@ -158,6 +158,22 @@ Supervisor.start_link(
              {:markdown, [assigns: fn template, _metadata -> {:cont, template} end]}
            ]
          ]
+       ],
+       [
+         site: :domain_1_test,
+         site_domain: "example1.com",
+         endpoint: Beacon.BeaconTest.EndpointSite,
+         router: Beacon.BeaconTest.Router,
+         repo: Beacon.BeaconTest.Repo,
+         mode: :testing
+       ],
+       [
+         site: :domain_2_test,
+         site_domain: "example2.com",
+         endpoint: Beacon.BeaconTest.EndpointSite,
+         router: Beacon.BeaconTest.Router,
+         repo: Beacon.BeaconTest.Repo,
+         mode: :testing
        ]
      ]}
   ],

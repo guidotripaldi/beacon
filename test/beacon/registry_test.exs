@@ -8,6 +8,8 @@ defmodule Beacon.RegistryTest do
              :booted,
              :data_source_test,
              :default_meta_tags_test,
+             :domain_1_test,
+             :domain_2_test,
              :host_test,
              :lifecycle_test,
              :lifecycle_test_fail,
